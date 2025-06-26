@@ -1,0 +1,5 @@
+# Ignore all files in data/
+data/*
+
+# But keep the raw folder
+!data/raw/

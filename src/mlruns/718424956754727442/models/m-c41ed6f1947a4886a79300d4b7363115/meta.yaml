@@ -1,0 +1,10 @@
+artifact_location: file:///C:/Users/HP/credit-risk-model/src/mlruns/718424956754727442/models/m-c41ed6f1947a4886a79300d4b7363115/artifacts
+creation_timestamp: 1750930062230
+experiment_id: '718424956754727442'
+last_updated_timestamp: 1750930068853
+model_id: m-c41ed6f1947a4886a79300d4b7363115
+model_type: null
+name: logistic_regression_model
+source_run_id: 7e4ab90f2f2d4522a5c957931c9ecf7a
+status: 2
+status_message: null

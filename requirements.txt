@@ -1,0 +1,13 @@
+pandas
+numpy
+scikit-learn
+mlflow
+pytest
+openpyxl
+joblib
+pytest
+fastapi
+uvicorn
+pydantic
+flake8
+
