@@ -1,7 +1,6 @@
 import os
 import pandas as pd
 
-# Get absolute path to project root (one level up from tests folder)
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
 
