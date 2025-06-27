@@ -1,6 +1,6 @@
-# Ignore all files in data folder
+# Ignore everything in data/
 data/*
 
-# Except keep the raw folder and its contents
+# But do NOT ignore data/raw/ folder and its contents
 !data/raw/
 !data/raw/**
