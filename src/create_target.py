@@ -8,7 +8,9 @@ raw_data_path = os.path.join("data", "raw", "data.xlsx")
 df = pd.read_excel(raw_data_path)
 
 # Convert time column to datetime
-df["TransactionStartTime"] = pd.to_datetime(df["TransactionStartTime"], errors="coerce")
+df["TransactionStartTime"] = pd.to_datetime(
+    df["TransactionStartTime"], errors="coerce"
+)
 
 # Snapshot date = max date + 1 day
 snapshot_date = df["TransactionStartTime"].max() + pd.Timedelta(days=1)
@@ -19,7 +21,7 @@ rfm = (
     .agg({
         "TransactionStartTime": lambda x: (snapshot_date - x.max()).days,
         "TransactionId": "count",
-        "Amount": "sum"
+        "Amount": "sum",
     })
     .reset_index()
 )
@@ -27,7 +29,9 @@ rfm.columns = ["AccountId", "Recency", "Frequency", "Monetary"]
 
 # Step 2: Scale RFM
 scaler = StandardScaler()
-rfm_scaled = scaler.fit_transform(rfm[["Recency", "Frequency", "Monetary"]])
+rfm_scaled = scaler.fit_transform(
+    rfm[["Recency", "Frequency", "Monetary"]]
+)
 
 # Step 3: Cluster with KMeans
 kmeans = KMeans(n_clusters=3, random_state=42)
@@ -35,9 +39,10 @@ rfm["Cluster"] = kmeans.fit_predict(rfm_scaled)
 
 # Step 4: Identify high-risk cluster
 cluster_summary = rfm.groupby("Cluster")[["Recency", "Frequency", "Monetary"]].mean()
+
 high_risk_cluster = cluster_summary.sort_values(
     by=["Recency", "Frequency", "Monetary"],
-    ascending=[False, True, True]
+    ascending=[False, True, True],
 ).index[0]
 
 rfm["is_high_risk"] = (rfm["Cluster"] == high_risk_cluster).astype(int)

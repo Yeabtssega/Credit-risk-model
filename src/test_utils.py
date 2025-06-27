@@ -1,4 +1,3 @@
-import pytest
 from utils import is_risk_label_valid
 
 

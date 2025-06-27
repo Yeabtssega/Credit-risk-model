@@ -31,7 +31,8 @@ def main():
     # Check row count match
     if len(X) != len(y):
         print(
-            f"Error: Number of samples in features ({len(X)}) and target ({len(y)}) do not match."
+            f"Error: Number of samples in features ({len(X)}) and target ({len(y)}) "
+            "do not match."
         )
         return
 
@@ -94,7 +95,10 @@ def main():
             if roc_auc is not None:
                 mlflow.log_metric("roc_auc", roc_auc)
 
-            mlflow.sklearn.log_model(best_estimator, artifact_path=name + "_model")
+            mlflow.sklearn.log_model(
+                best_estimator,
+                artifact_path=f"{name}_model"
+            )
 
             print(f"{name} done. F1 score: {f1:.4f}")
 

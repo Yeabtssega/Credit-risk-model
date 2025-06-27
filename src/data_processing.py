@@ -1,5 +1,4 @@
 import pandas as pd
-from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
@@ -46,8 +45,6 @@ def load_and_process_data(filepath):
         "ChannelId",
     ]
 
-    # If any of these features have missing values, you may want to fill or drop them before pipeline
-
     # Preprocessing pipeline
     numeric_transformer = StandardScaler()
     categorical_transformer = OneHotEncoder(handle_unknown="ignore", sparse=False)
@@ -62,14 +59,13 @@ def load_and_process_data(filepath):
     # Fit and transform
     X_processed = preprocessor.fit_transform(df)
 
-    # Optionally convert to DataFrame with feature names
+    # Convert to DataFrame with feature names
     cat_cols = preprocessor.named_transformers_["cat"].get_feature_names_out(
         categorical_features
     )
     processed_columns = numeric_features + list(cat_cols)
     X_processed_df = pd.DataFrame(X_processed, columns=processed_columns)
 
-    # Return processed features and original df (in case you want to merge with target later)
     return X_processed_df, df
 
 
