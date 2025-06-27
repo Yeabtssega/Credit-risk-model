@@ -4,6 +4,22 @@ data/*
 # But do NOT ignore the raw folder and its contents
 !data/raw/
 !data/raw/**
+
+# Ignore Python cache files and folders
 __pycache__/
 *.pyc
 
+# Ignore Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore Python virtual environments (if any)
+venv/
+.env/
+
+# Ignore OS generated files
+.DS_Store
+Thumbs.db
+
+# Ignore IDE/editor folders
+.vscode/
+.idea/
