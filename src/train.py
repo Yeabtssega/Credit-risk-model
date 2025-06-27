@@ -4,7 +4,14 @@ import mlflow.sklearn
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score
+from sklearn.metrics import (
+    accuracy_score,
+    precision_score,
+    recall_score,
+    f1_score,
+    roc_auc_score,
+)
+
 
 def main():
     # Paths (adjust if needed)
@@ -16,14 +23,16 @@ def main():
     y = pd.read_csv(target_path)
 
     # Extract label column from target (assumes single column 'is_high_risk' or first column)
-    if 'is_high_risk' in y.columns:
-        y = y['is_high_risk']
+    if "is_high_risk" in y.columns:
+        y = y["is_high_risk"]
     else:
         y = y.iloc[:, 0]
 
     # Check row count match
     if len(X) != len(y):
-        print(f"Error: Number of samples in features ({len(X)}) and target ({len(y)}) do not match.")
+        print(
+            f"Error: Number of samples in features ({len(X)}) and target ({len(y)}) do not match."
+        )
         return
 
     # Train-test split
@@ -95,6 +104,7 @@ def main():
                 best_model = best_estimator
 
     print(f"✅ Best model: {best_model_name} with F1 score: {best_f1:.4f}")
+
 
 if __name__ == "__main__":
     main()

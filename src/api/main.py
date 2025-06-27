@@ -8,6 +8,7 @@ app = FastAPI()
 # Load best model from MLflow registry or local path
 model = mlflow.pyfunc.load_model("models:/CreditRiskBestModel/Production")
 
+
 @app.post("/predict", response_model=PredictionResponse)
 def predict(data: CustomerData):
     try:
