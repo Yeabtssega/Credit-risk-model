@@ -5,5 +5,3 @@ services:
     build: .
     ports:
       - "8000:8000"
-    environment:
-      - MLFLOW_TRACKING_URI=http://localhost:5000

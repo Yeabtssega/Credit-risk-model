@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/HP/credit-risk-model/mlruns/434862511122141502/8009727c934a4b49bd7ef62a814694cd/artifacts
+end_time: 1751014775171
+entry_point_name: ''
+experiment_id: '434862511122141502'
+lifecycle_stage: active
+run_id: 8009727c934a4b49bd7ef62a814694cd
+run_name: logistic_regression
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1751014770587
+status: 4
+tags: []
+user_id: HP

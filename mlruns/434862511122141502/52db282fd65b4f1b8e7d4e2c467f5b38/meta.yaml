@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/HP/credit-risk-model/mlruns/434862511122141502/52db282fd65b4f1b8e7d4e2c467f5b38/artifacts
+end_time: 1751015071102
+entry_point_name: ''
+experiment_id: '434862511122141502'
+lifecycle_stage: active
+run_id: 52db282fd65b4f1b8e7d4e2c467f5b38
+run_name: random_forest
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1751015049510
+status: 3
+tags: []
+user_id: HP

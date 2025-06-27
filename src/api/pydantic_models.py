@@ -1,10 +1,14 @@
-from pydantic import BaseModel, conlist
-
+from pydantic import BaseModel
 
 class CustomerData(BaseModel):
-    # List of 6 numeric features (adjust length if needed)
-    features: conlist(float, min_items=6, max_items=6)
+    # Define features your model expects
+    feature1: float
+    feature2: int
+    # Add all required fields here
 
+    def to_dataframe(self):
+        import pandas as pd
+        return pd.DataFrame([self.dict()])
 
 class PredictionResponse(BaseModel):
     risk_probability: float
