@@ -1,4 +1,4 @@
-from utils import is_risk_label_valid
+from .utils import is_risk_label_valid
 
 
 def test_valid_labels():

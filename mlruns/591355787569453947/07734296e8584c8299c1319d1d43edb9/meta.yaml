@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/HP/credit-risk-model/mlruns/591355787569453947/07734296e8584c8299c1319d1d43edb9/artifacts
+end_time: 1751278280266
+entry_point_name: ''
+experiment_id: '591355787569453947'
+lifecycle_stage: active
+run_id: 07734296e8584c8299c1319d1d43edb9
+run_name: adaptable-stork-997
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1751278267316
+status: 3
+tags: []
+user_id: HP

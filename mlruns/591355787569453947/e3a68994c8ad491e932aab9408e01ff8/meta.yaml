@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/HP/credit-risk-model/mlruns/591355787569453947/e3a68994c8ad491e932aab9408e01ff8/artifacts
+end_time: 1751273147959
+entry_point_name: ''
+experiment_id: '591355787569453947'
+lifecycle_stage: active
+run_id: e3a68994c8ad491e932aab9408e01ff8
+run_name: classy-koi-286
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1751273123580
+status: 3
+tags: []
+user_id: HP

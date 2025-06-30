@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/HP/credit-risk-model/mlruns/591355787569453947/a0678b1eb6db4c2ebfbc2277f269e64b/artifacts
+end_time: 1751273123575
+entry_point_name: ''
+experiment_id: '591355787569453947'
+lifecycle_stage: active
+run_id: a0678b1eb6db4c2ebfbc2277f269e64b
+run_name: clumsy-slug-178
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1751273109249
+status: 3
+tags: []
+user_id: HP
