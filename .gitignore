@@ -1,25 +1,28 @@
 # Ignore everything in data folder
 data/*
 
-# But do NOT ignore the raw folder and its contents
+# But do NOT ignore raw folder and its contents
 !data/raw/
 !data/raw/**
 
-# Ignore Python cache files and folders
+# Python cache
 __pycache__/
 *.pyc
 
-# Ignore Jupyter notebook checkpoints
+# Jupyter notebook checkpoints
 .ipynb_checkpoints/
 
-# Ignore Python virtual environments (if any)
+# Python virtual environment
 venv/
 .env/
 
-# Ignore OS generated files
+# Model artifacts (optional – track manually if needed)
+models/mlflow_model/
+
+# OS generated files
 .DS_Store
 Thumbs.db
 
-# Ignore IDE/editor folders
+# IDE/editor configs
 .vscode/
 .idea/
