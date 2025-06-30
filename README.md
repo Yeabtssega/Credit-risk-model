@@ -1,78 +1,159 @@
-Bati-credit-risk-model 
+Credit Risk Model – Bati Bank
+Author: Yeabtsega Tilahun
+Organization: Bati Bank
+Project: Credit Scoring for Buy-Now-Pay-Later Loan Approvals
+Submission: Final | July 1, 2025
 
-Credit risk model for Bati Bank Credit Risk Modeling for Bati Bank This project is part of Bati Bank’s strategic initiative to enable Buy Now, Pay Later (BNPL) services in partnership with an eCommerce platform. The goal is to build a Credit Scoring Model that assigns a risk probability, credit score, and loan recommendation to new applicants based on transaction behavior. 
+📘 Project Overview
+Bati Bank is partnering with a successful eCommerce company to launch a Buy-Now-Pay-Later (BNPL) service. As the Analytics Engineer, you're tasked with designing and deploying a Credit Scoring Model that assesses the credit risk of customers using behavioral transaction data.
 
-📌 Project Overview Organization: Bati Bank 
+This project delivers a complete ML workflow—from data preprocessing and feature engineering to risk modeling, CI/CD deployment, and an interactive prediction API.
 
-Objective: Build a credit scoring model to identify high-risk and low-risk users using transaction data 
+🎯 Business Objective
+Credit scoring quantifies the likelihood that a borrower will default on a loan. Our key innovation is transforming customer transaction behavior (RFM metrics) into a proxy for credit risk, enabling risk-based loan decisioning.
 
-Business Value: Improve loan approval decisions, manage credit risk, and comply with Basel II standards 
+✅ Goal: Assign risk probability scores and recommend credit terms for new customers using transaction behavior.
 
-📁 Project Structure plaintext Copy Edit credit-risk-model/ ├── .github/workflows/ci.yml # GitHub Actions for CI/CD ├── data/ # Add this folder to .gitignore │ ├── raw/ # Raw input data │ └── processed/ # Cleaned and transformed data ├── notebooks/ │ └── 1.0-eda.ipynb # Exploratory data analysis ├── src/ │ ├── init.py │ ├── data_processing.py # Feature engineering functions │ ├── train.py # Model training script │ ├── predict.py # Inference/prediction script │ └── api/ │ ├── main.py # FastAPI application │ └── pydantic_models.py # Data validation with Pydantic ├── tests/ │ └── test_data_processing.py # Unit tests ├── Dockerfile ├── docker-compose.yml ├── requirements.txt ├── .gitignore └── README.md 📊 Credit Scoring Business Understanding 
+💼 Credit Scoring Business Understanding
+1. Why does Basel II demand an interpretable model?
+Basel II emphasizes transparency, accountability, and regulatory compliance. Financial institutions must explain how and why a credit decision was made. Therefore, interpretable models (like logistic regression with Weight of Evidence) are preferred for traceability.
 
-Basel II Accord and the Need for an Interpretable Model The Basel II Capital Accord requires financial institutions to adopt a risk-sensitive framework that links capital requirements to the underlying credit risk of lending activities. Under this framework, banks must quantify credit risk using either standardized or internal ratings-based approaches. This increases the demand for interpretable, auditable, and well-documented models, especially in regulatory environments. For Bati Bank, partnering with an eCommerce platform to offer "Buy Now, Pay Later" (BNPL) services, this means our credit scoring model must not only be accurate but also transparent. Stakeholders (including regulators) need to understand how decisions are made and ensure the model does not introduce bias or operational risk. 
+2. Why create a proxy target variable?
+The dataset lacks an explicit “default” label. We create a proxy using RFM clustering, defining "high-risk" customers based on low frequency and monetary values. This approach enables modeling, but comes with business risk: poor proxy definitions may misclassify customers, leading to biased decisions.
 
-The Role and Risk of Using a Proxy Variable Since the dataset lacks a direct label indicating loan default, we must engineer a proxy variable to classify customers as "high-risk" or "low-risk." In this project, behavioral metrics such as fraud flags, RFM patterns, or late payment behavior can serve as proxies. While necessary, this approach introduces business risks: 
+3. Simple vs Complex Models: What’s the trade-off?
+Simple (e.g., Logistic Regression + WoE): Interpretable, compliant, easier to audit
 
-Mislabeling: Customers might be incorrectly categorized, leading to either over-rejection (losing good customers) or over-lending (exposing the bank to unnecessary risk). 
+Complex (e.g., Gradient Boosting): Higher accuracy but less transparent
+In regulated sectors, the cost of opacity may outweigh marginal accuracy gains.
 
-Bias propagation: If the proxy variable embeds historical biases (e.g., based on region or channel), the model could reinforce them. 
+🗂️ Project Structure
+bash
+Copy
+Edit
+credit-risk-model/
+├── .github/workflows/ci.yml        # CI/CD: lint + unit tests
+├── data/
+│   ├── raw/                        # Raw data (ignored in Git)
+│   └── processed/                  # Processed, ready-to-train
+├── notebooks/
+│   └── 1.0-eda.ipynb               # Exploratory Data Analysis
+├── src/
+│   ├── data_processing.py          # Feature Engineering
+│   ├── train.py                    # Model training & MLflow
+│   ├── predict.py                  # Model inference
+│   └── api/
+│       ├── main.py                 # FastAPI backend
+│       └── pydantic_models.py      # Input/Output schemas
+├── tests/
+│   └── test_data_processing.py     # Unit tests
+├── Dockerfile
+├── docker-compose.yml
+├── requirements.txt
+├── .gitignore
+└── README.md
+📊 Key Tasks and Results
+✅ Task 1 – Basel II & Business Framing
+Defined credit risk modeling scope
 
-Model drift: As customer behavior evolves, the proxy may become outdated, degrading model performance over time. Thus, continuous monitoring and periodic re-evaluation of the proxy are essential. 
+Identified need for transparency and proxy labels
 
-Model Choice: Interpretability vs. Predictive Power In regulated financial services, there's a critical trade-off between model interpretability and predictive power: 
+✅ Task 2 – Exploratory Data Analysis (EDA)
+Uncovered outliers and missing values
 
-Simple, Interpretable Models (e.g., Logistic Regression with Weight of Evidence encoding): 
+Identified patterns in transaction amount, fraud, and product use
 
-✅ Pros: 
+Summarized top insights in Jupyter Notebook
 
-Easy to explain to regulators and business teams 
+✅ Task 3 – Feature Engineering
+Created:
 
-Transparent decision boundaries 
+Aggregate features (Total amount, Count, Avg)
 
-Fast training and deployment 
+Temporal features (Day, Hour, Month)
 
-❌ Cons: 
+Encoded categorical variables
 
-Limited ability to capture complex patterns 
+Normalized numerical data
 
-Lower performance on high-dimensional or nonlinear data 
+Used xverse and woe for feature selection and scoring
 
-Complex, High-Performance Models (e.g., Gradient Boosting, XGBoost, LightGBM): 
+✅ Task 4 – Proxy Variable Creation
+RFM (Recency, Frequency, Monetary) engineered
 
-✅ Pros: 
+Used KMeans clustering for customer segmentation
 
-Higher accuracy and better handling of feature interactions 
+Defined is_high_risk = 1 for the lowest value cluster
 
-Robust to missing values and outliers 
+✅ Task 5 – Model Training and Evaluation
+Trained multiple models: Logistic Regression, Gradient Boosting
 
-❌ Cons: 
+Evaluated using ROC-AUC, F1, Accuracy
 
-Harder to interpret 
+Tracked experiments using MLflow
 
-Risk of overfitting and lack of transparency 
+Registered the best model to MLflow Model Registry
 
-Regulatory scrutiny may delay approval 
+Created automated unit tests with pytest
 
-To align with Basel II and ensure trustworthy lending decisions, we may start with an interpretable model for deployment and monitor performance, then explore complex models under strict governance using explainability tools (like SHAP). 
+✅ Task 6 – Model Deployment & CI/CD
+Deployed prediction API using FastAPI
 
-📚 Learning Objectives Skills Feature Engineering 
+Dockerized app with Dockerfile and docker-compose.yml
 
-ML Modeling and Hyperparameter Tuning 
+CI pipeline runs on every push:
 
-CI/CD & FastAPI Deployment 
+flake8 for linting
 
-MLOps with MLflow and CML 
+pytest for test coverage
 
-Python Unit Testing & Logging 
+/predict endpoint accepts new customer data and returns:
 
-Knowledge Credit Risk & Basel II 
+Risk probability
 
-Proxy Variable Design 
+Credit score (scaled)
 
-Model Interpretability vs. Performance 
+Loan amount and duration recommendations
 
-Regulatory-Compliant ML Systems 
+🧠 Learning Outcomes
+Tools & Skills Used:
+scikit-learn, mlflow, pytest, FastAPI, Docker
 
- 
-"# Trigger CI" 
+CI/CD with GitHub Actions
+
+Model management with MLflow
+
+Python best practices: pipelining, modular code, testing
+
+Real-World Takeaways:
+End-to-end ML systems must be automated, interpretable, and deployable
+
+Proxy targets enable learning without perfect ground-truth
+
+Regulatory alignment is as important as predictive power
+
+🚀 How to Run the Project
+🔧 Local API Setup
+bash
+Copy
+Edit
+git clone https://github.com/Yeabtssega/Credit-risk-model.git
+cd Credit-risk-model
+docker-compose up --build
+🔍 Test API
+Visit: http://127.0.0.1:8000/docs
+Use Swagger UI to test the /predict endpoint.
+
+📚 References
+Statistical Models for Credit Scoring
+
+Credit Scoring Guidelines - World Bank
+
+Basel II Accord Summary
+
+Weight of Evidence & IV Explanation
+
+✅ Final Submission
+🎯 GitHub Repo: github.com/Yeabtssega/Credit-risk-model
+📦 Submission: July 1, 2025, 8PM UTC
+
